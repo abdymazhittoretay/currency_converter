@@ -10,6 +10,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white);
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            child: Column(
+              children: [
+                Text(
+                  "Currency\nConverter",
+                  style: TextStyle(fontSize: 36.0, color: Colors.blueAccent),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
