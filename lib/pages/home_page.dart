@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -9,11 +10,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final String _apiKey = dotenv.env['APIKEY'] ?? "";
+
   Future getCurrency() async {
     var response = await http.get(
-      Uri.https("api.currencyapi.com", "/v3/latest", {
-        "apikey": "API_KEY",
-      }),
+      Uri.https("api.currencyapi.com", "/v3/latest", {"apikey": _apiKey}),
     );
     print(response.body.length);
   }
