@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,8 +9,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future getCurrency() async {
+    var response = await http.get(
+      Uri.https("api.currencyapi.com", "/v3/latest", {
+        "apikey": "API_KEY",
+      }),
+    );
+    print(response.body.length);
+  }
+
   @override
   Widget build(BuildContext context) {
+    getCurrency();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
