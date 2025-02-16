@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     );
     var jsonData = jsonDecode(response.body);
     jsonData["data"].forEach((key, value) {
-      _currencies[key] = {"code": value["code"], "value": value["value"]};
+      _currencies[key] = value["value"];
     });
   }
 
