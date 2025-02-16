@@ -24,21 +24,35 @@ class DropdownMenus extends StatelessWidget {
         Text("From", style: TextStyle(fontSize: 24.0)),
         SizedBox(height: 12.0),
         DropdownButtonFormField(
+          menuMaxHeight: 350,
           decoration: InputDecoration(
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+              borderSide: BorderSide(color: Colors.black, width: 1.5),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+              borderSide: BorderSide(color: Colors.black, width: 1.5),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+              borderSide: BorderSide(color: Colors.black, width: 1.5),
             ),
           ),
           value: selectedFromValue,
           items:
               currencies.keys
-                  .map((key) => DropdownMenuItem(value: key, child: Text(key)))
+                  .map(
+                    (key) => DropdownMenuItem(
+                      value: key,
+                      child: Text(
+                        key,
+                        style: TextStyle(
+                          color:
+                              selectedFromValue == key
+                                  ? Colors.blueAccent
+                                  : null,
+                        ),
+                      ),
+                    ),
+                  )
                   .toList(),
           onChanged: onChangedFrom,
           dropdownColor: Colors.white,
@@ -48,21 +62,33 @@ class DropdownMenus extends StatelessWidget {
         Text("To", style: TextStyle(fontSize: 24.0)),
         SizedBox(height: 12.0),
         DropdownButtonFormField(
+          menuMaxHeight: 350,
           decoration: InputDecoration(
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+              borderSide: BorderSide(color: Colors.black, width: 1.5),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+              borderSide: BorderSide(color: Colors.black, width: 1.5),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+              borderSide: BorderSide(color: Colors.black, width: 1.5),
             ),
           ),
           value: selectedToValue,
           items:
               currencies.keys
-                  .map((key) => DropdownMenuItem(value: key, child: Text(key)))
+                  .map(
+                    (key) => DropdownMenuItem(
+                      value: key,
+                      child: Text(
+                        key,
+                        style: TextStyle(
+                          color:
+                              selectedToValue == key ? Colors.blueAccent : null,
+                        ),
+                      ),
+                    ),
+                  )
                   .toList(),
           onChanged: onChangedTo,
           dropdownColor: Colors.white,
