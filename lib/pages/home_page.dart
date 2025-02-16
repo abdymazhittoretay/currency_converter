@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:currency_converter_app/widgets/dropdown_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +17,9 @@ class _HomePageState extends State<HomePage> {
 
   final Map<String, dynamic> _currencies = {};
 
+  String? _selectedFromValue;
+  String? _selectedToValue;
+
   Future _getCurrency() async {
     var response = await http.get(
       Uri.https("api.currencyapi.com", "/v3/latest", {"apikey": _apiKey}),
@@ -24,6 +28,10 @@ class _HomePageState extends State<HomePage> {
     jsonData["data"].forEach((key, value) {
       _currencies[key] = value["value"];
     });
+    _selectedFromValue = "USD";
+    _selectedToValue = "KZT";
+
+    setState(() {});
   }
 
   @override
@@ -42,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -54,11 +62,36 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(height: 24.0),
+                _currencies.isNotEmpty
+                    ? DropdownMenus(
+                      currencies: _currencies,
+                      selectedFromValue: _selectedFromValue,
+                      selectedToValue: _selectedToValue,
+                      onChangedFrom: onChangedFrom,
+                      onChangedTo: onChangedTo,
+                    )
+                    : Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.blueAccent,
+                      ),
+                    ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void onChangedFrom(value) {
+    setState(() {
+      _selectedFromValue = value;
+    });
+  }
+
+  void onChangedTo(value) {
+    setState(() {
+      _selectedToValue = value;
+    });
   }
 }
