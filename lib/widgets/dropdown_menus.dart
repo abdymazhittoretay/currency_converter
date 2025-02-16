@@ -47,7 +47,7 @@ class DropdownMenus extends StatelessWidget {
                         style: TextStyle(
                           color:
                               selectedFromValue == key
-                                  ? Colors.blueAccent
+                                  ? Colors.blueAccent[700]
                                   : null,
                         ),
                       ),
@@ -84,7 +84,9 @@ class DropdownMenus extends StatelessWidget {
                         key,
                         style: TextStyle(
                           color:
-                              selectedToValue == key ? Colors.blueAccent : null,
+                              selectedToValue == key
+                                  ? Colors.blueAccent[700]
+                                  : null,
                         ),
                       ),
                     ),
