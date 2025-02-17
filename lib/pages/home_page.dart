@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:currency_converter_app/widgets/amount_textfield.dart';
+import 'package:currency_converter_app/widgets/convert_button.dart';
 import 'package:currency_converter_app/widgets/dropdown_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -78,46 +80,9 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 24.0),
                         Text("Amount", style: TextStyle(fontSize: 24.0)),
                         SizedBox(height: 12.0),
-                        TextField(
-                          controller: _controller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1.5,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1.5,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 40.0),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            backgroundColor: Colors.blueAccent,
-                            foregroundColor: Colors.white,
-                            minimumSize: Size(
-                              MediaQuery.sizeOf(context).width,
-                              80,
-                            ), // Full width & height
-                            textStyle: TextStyle(fontSize: 24.0),
-                          ),
-                          onPressed: () {},
-                          child: Text("Convert"),
-                        ),
+                        AmountTextfield(controller: _controller),
+                        SizedBox(height: 24.0),
+                        ConvertButton(),
                       ],
                     )
                     : Center(
