@@ -20,6 +20,8 @@ class _HomePageState extends State<HomePage> {
   String? _selectedFromValue;
   String? _selectedToValue;
 
+  final TextEditingController _controller = TextEditingController();
+
   Future _getCurrency() async {
     var response = await http.get(
       Uri.https("api.currencyapi.com", "/v3/latest", {"apikey": _apiKey}),
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // _getCurrency();
+    _getCurrency();
 
     super.initState();
   }
@@ -63,12 +65,43 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 24.0),
                 _currencies.isNotEmpty
-                    ? DropdownMenus(
-                      currencies: _currencies,
-                      selectedFromValue: _selectedFromValue,
-                      selectedToValue: _selectedToValue,
-                      onChangedFrom: onChangedFrom,
-                      onChangedTo: onChangedTo,
+                    ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DropdownMenus(
+                          currencies: _currencies,
+                          selectedFromValue: _selectedFromValue,
+                          selectedToValue: _selectedToValue,
+                          onChangedFrom: onChangedFrom,
+                          onChangedTo: onChangedTo,
+                        ),
+                        SizedBox(height: 24.0),
+                        Text("Amount", style: TextStyle(fontSize: 24.0)),
+                        SizedBox(height: 12.0),
+                        TextField(
+                          controller: _controller,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                     : Center(
                       child: CircularProgressIndicator(

@@ -18,6 +18,17 @@ class DropdownMenus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var inputDecoration = InputDecoration(
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black, width: 1.5),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black, width: 1.5),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black, width: 1.5),
+      ),
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,17 +36,7 @@ class DropdownMenus extends StatelessWidget {
         SizedBox(height: 12.0),
         DropdownButtonFormField(
           menuMaxHeight: 350,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 1.5),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 1.5),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 1.5),
-            ),
-          ),
+          decoration: inputDecoration,
           value: selectedFromValue,
           items:
               currencies.keys
@@ -63,17 +64,7 @@ class DropdownMenus extends StatelessWidget {
         SizedBox(height: 12.0),
         DropdownButtonFormField(
           menuMaxHeight: 350,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 1.5),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 1.5),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 1.5),
-            ),
-          ),
+          decoration: inputDecoration,
           value: selectedToValue,
           items:
               currencies.keys
