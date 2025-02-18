@@ -22,9 +22,9 @@ class _HomePageState extends State<HomePage> {
   String? _selectedFromValue;
   String? _selectedToValue;
 
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
 
-  String _result = "";
+  final TextEditingController _resultController = TextEditingController();
 
   Future _getCurrency() async {
     var response = await http.get(
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 24.0),
+                SizedBox(height: 10.0),
                 _currencies.isNotEmpty
                     ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,12 +80,63 @@ class _HomePageState extends State<HomePage> {
                           onChangedTo: onChangedTo,
                         ),
                         SizedBox(height: 24.0),
-                        Text("Amount", style: TextStyle(fontSize: 24.0)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Amount", style: TextStyle(fontSize: 24.0)),
+                            Text(
+                              "$_selectedFromValue",
+                              style: TextStyle(fontSize: 24.0),
+                            ),
+                          ],
+                        ),
                         SizedBox(height: 12.0),
-                        AmountTextfield(controller: _controller),
+                        AmountTextfield(controller: _amountController),
                         SizedBox(height: 24.0),
-                        ConvertButton(
-                          onPressed: convert,
+                        ConvertButton(onPressed: convert),
+                        SizedBox(height: 24.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Result", style: TextStyle(fontSize: 24.0)),
+                            Text(
+                              "$_selectedToValue",
+                              style: TextStyle(fontSize: 24.0),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 12.0),
+                        TextField(
+                          enabled: false,
+                          controller: _resultController,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     )
@@ -105,18 +156,22 @@ class _HomePageState extends State<HomePage> {
   void onChangedFrom(value) {
     setState(() {
       _selectedFromValue = value;
+      _amountController.clear();
+      _resultController.clear();
     });
   }
 
   void onChangedTo(value) {
     setState(() {
       _selectedToValue = value;
+      _amountController.clear();
+      _resultController.clear();
     });
   }
 
-  void convert(){
+  void convert() {
     final num fromValue = _currencies[_selectedFromValue];
     final num toValue = _currencies[_selectedToValue];
-    _result = (toValue / fromValue).toStringAsFixed(1);
+    _resultController.text = (toValue / fromValue).toStringAsFixed(2);
   }
 }
