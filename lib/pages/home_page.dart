@@ -156,22 +156,22 @@ class _HomePageState extends State<HomePage> {
   void onChangedFrom(value) {
     setState(() {
       _selectedFromValue = value;
-      _amountController.clear();
-      _resultController.clear();
     });
+    convert();
   }
 
   void onChangedTo(value) {
     setState(() {
       _selectedToValue = value;
-      _amountController.clear();
-      _resultController.clear();
     });
+    convert();
   }
 
   void convert() {
+    if (double.tryParse(_amountController.text) == null) return;
     final num fromValue = _currencies[_selectedFromValue];
     final num toValue = _currencies[_selectedToValue];
-    _resultController.text = (toValue / fromValue).toStringAsFixed(2);
+    final num amount = double.tryParse(_amountController.text) ?? 1.0;
+    _resultController.text = (toValue / fromValue * amount).toStringAsFixed(2);
   }
 }
