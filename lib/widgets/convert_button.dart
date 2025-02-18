@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ConvertButton extends StatelessWidget {
-  const ConvertButton({super.key});
+  final void Function()? onPressed;
+
+  const ConvertButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ConvertButton extends StatelessWidget {
         ), // Full width & height
         textStyle: TextStyle(fontSize: 24.0),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Text("Convert"),
     );
   }

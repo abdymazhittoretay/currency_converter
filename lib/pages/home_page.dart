@@ -24,6 +24,8 @@ class _HomePageState extends State<HomePage> {
 
   final TextEditingController _controller = TextEditingController();
 
+  String _result = "";
+
   Future _getCurrency() async {
     var response = await http.get(
       Uri.https("api.currencyapi.com", "/v3/latest", {"apikey": _apiKey}),
@@ -82,7 +84,9 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 12.0),
                         AmountTextfield(controller: _controller),
                         SizedBox(height: 24.0),
-                        ConvertButton(),
+                        ConvertButton(
+                          onPressed: convert,
+                        ),
                       ],
                     )
                     : Center(
@@ -108,5 +112,11 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedToValue = value;
     });
+  }
+
+  void convert(){
+    final num fromValue = _currencies[_selectedFromValue];
+    final num toValue = _currencies[_selectedToValue];
+    _result = (toValue / fromValue).toStringAsFixed(1);
   }
 }
